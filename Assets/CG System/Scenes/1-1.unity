@@ -153,6 +153,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TextBlocks: []
+  <PlayState>k__BackingField: 0
+  <FastForward>k__BackingField: 0
+  <AutoPlay>k__BackingField: 0
+  <Language>k__BackingField: 0
+  _manager: {fileID: 0}
+  _previousPlayState: 0
+  _timer: 0
 --- !u!224 &127000623
 RectTransform:
   m_ObjectHideFlags: 0
@@ -360,11 +367,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 096c7153971d2744183688e1dd2b05fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textColor: {r: 0, g: 0, b: 0, a: 1}
+  _textColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 1
   _typeSpeed: 10
   _fastForwardTypeSpeed: 50
+  _textMeshPro: {fileID: 0}
   _displaySpeed: 1
   _fastForwardDisplaySpeed: 10
+  _image: {fileID: 0}
+  _color:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  _isEntering: 0
+  _isExiting: 0
 --- !u!114 &212871925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,6 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b3734ef144fb34e9e445d05c533967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 0}
 --- !u!114 &596618315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,6 +535,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b4a6893f7207f4a9ac083a48c60215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _XMLData:
+    Lines: []
+  _lineIndex: 0
 --- !u!114 &596618316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,6 +550,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de475fd168608a84e9adcfe003b206b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _line:
+    TypeString: 
+    DialogBoxString: 
+    Character: 
+    Expression: 
+    EffectString: 
+    IntervalString: 
+    Chinese: 
+    English: 
+  _scenes: []
+  _narrations: []
+  _dialog: {fileID: 0}
+  _player: {fileID: 0}
+  _reader: {fileID: 0}
+  _currentSceneIndex: 0
+  _currentNarrationIndex: 0
 --- !u!4 &596618317
 Transform:
   m_ObjectHideFlags: 0
@@ -902,24 +942,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f90730cfd65cc45b4f0e8b45499a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textColor: {r: 0, g: 0, b: 0, a: 1}
+  _textColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 1
   _typeSpeed: 10
   _fastForwardTypeSpeed: 50
+  _textMeshPro: {fileID: 0}
   _displaySpeed: 1
   _fastForwardDisplaySpeed: 10
   _expressionReference:
     m_AssetGUID: de0355e92668e8741bb2227043fb4c04
     m_SubObjectName: 
     m_SubObjectType: 
+    m_CachedAsset: {fileID: 0}
+    m_CachedGUID: 
     m_EditorAssetChanged: 0
   _nameStampReference:
     m_AssetGUID: a620703768556bc4b80d567107bde5a4
     m_SubObjectName: 
     m_SubObjectType: 
+    m_CachedAsset: {fileID: 0}
+    m_CachedGUID: 
     m_EditorAssetChanged: 0
   _dialogBoxes:
   - {fileID: 21300000, guid: f0d2a9a941025c143a572f9f64ef4be7, type: 3}
   - {fileID: 21300000, guid: 9e7745a1307996746ab32dd93a9f1157, type: 3}
+  <IsPlaying>k__BackingField: 0
+  _dialogBox: {fileID: 0}
+  _expression: {fileID: 0}
+  _nameStamp: {fileID: 0}
+  _imagesToChange: []
+  _color:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  _needFadeIn: 0
+  _isEntering: 0
+  _isExiting: 0
 --- !u!1 &854007509
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,6 +1011,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b4a6893f7207f4a9ac083a48c60215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _XMLData:
+    Lines: []
+  _lineIndex: 0
 --- !u!4 &854007511
 Transform:
   m_ObjectHideFlags: 0
@@ -1419,11 +1484,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 096c7153971d2744183688e1dd2b05fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textColor: {r: 0, g: 0, b: 0, a: 1}
+  _textColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 1
   _typeSpeed: 10
   _fastForwardTypeSpeed: 50
+  _textMeshPro: {fileID: 0}
   _displaySpeed: 1
   _fastForwardDisplaySpeed: 10
+  _image: {fileID: 0}
+  _color:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  _isEntering: 0
+  _isExiting: 0
 --- !u!114 &1347854075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1514,11 +1592,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 096c7153971d2744183688e1dd2b05fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textColor: {r: 0, g: 0, b: 0, a: 1}
+  _textColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 1
   _typeSpeed: 10
   _fastForwardTypeSpeed: 50
+  _textMeshPro: {fileID: 0}
   _displaySpeed: 1
   _fastForwardDisplaySpeed: 10
+  _image: {fileID: 0}
+  _color:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  _isEntering: 0
+  _isExiting: 0
 --- !u!114 &1401021936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1596,6 +1687,12 @@ MonoBehaviour:
   _minCircleRadius: 10
   _maxCircleRadius: 50
   _minCircleAngle: 300
+  _startPos: {x: 0, y: 0}
+  _currentPos: {x: 0, y: 0}
+  _startTime: 0
+  _isDrawingCircle: 0
+  _currentAngle: 0
+  _maxDistance: 0
 --- !u!114 &1495460212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1826,6 +1923,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _displaySpeed: 1
+  _background: {fileID: 0}
+  _color:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
 --- !u!114 &1923714827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1977,6 +2080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b3734ef144fb34e9e445d05c533967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 0}
 --- !u!4 &1999489399
 Transform:
   m_ObjectHideFlags: 0
@@ -2044,11 +2148,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 096c7153971d2744183688e1dd2b05fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textColor: {r: 0, g: 0, b: 0, a: 1}
+  _textColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 1
   _typeSpeed: 10
   _fastForwardTypeSpeed: 50
+  _textMeshPro: {fileID: 0}
   _displaySpeed: 1
   _fastForwardDisplaySpeed: 10
+  _image: {fileID: 0}
+  _color:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  _isEntering: 0
+  _isExiting: 0
 --- !u!114 &2007619244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2119,6 +2236,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _displaySpeed: 1
+  _background: {fileID: 0}
+  _color:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
 --- !u!114 &2019361808
 MonoBehaviour:
   m_ObjectHideFlags: 0

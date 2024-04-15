@@ -20,35 +20,35 @@
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>NoAvatar</DialogBox>
+		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩甲</Character>
 		<Chinese>哎呀！你别挤我！反正现在船还没来，谁都看不到！</Chinese>
 		<English>Hey, don’t push me! The boat isn't here yet. Nobody can see it!</English>
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>NoAvatar</DialogBox>
+		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩乙</Character>
 		<Chinese>我才没有挤你呢！……现在谁手里贝壳最多呀？</Chinese>
 		<English>I didn’t push you! So, who has the most seashells in their hands?</English>
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>NoAvatar</DialogBox>
+		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩丙</Character>
 		<Chinese>肯定是小水啦，她每次都能说对编号……</Chinese>
 		<English>It must be Xiao Shui. She always gets the number right...</English>
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>NoAvatar</DialogBox>
+		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩甲</Character>
 		<Chinese>我捡的好看的贝壳都被小水挑光了！</Chinese>
 		<English>Xiao Shui took all the pretty seashells I collected!</English>
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>Normal</DialogBox>
+		<TextBoxType>Normal</TextBoxType>
 		<Character>小小水</Character>
 		<Expression>普通</Expression>
 		<Chinese>哼，谁让我阿爸有“千里眼”呢！那么远都可以看清船只的编码！</Chinese>
@@ -65,14 +65,14 @@
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>NoAvatar</DialogBox>
+		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩甲</Character>
 		<Chinese>是7868977！</Chinese>
 		<English>It’s 7868977!</English>
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>NoAvatar</DialogBox>
+		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩乙 </Character>
 		<Chinese>不对！明明后面是811！</Chinese>
 		<English>No, it’s 811 at the end!</English>
@@ -91,7 +91,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>Normal</DialogBox>
+		<TextBoxType>Normal</TextBoxType>
 		<Character>小小水</Character>
 		<Expression>大喊</Expression>
 		<Chinese>是7966971！！</Chinese>
@@ -108,14 +108,14 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>NoAvatar</DialogBox>
+		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩甲</Character>
 		<Chinese>真的是7966971！又是小水赢了！</Chinese>
 		<English>It's really 7966971! Xiao Shui won again!</English>
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>NoAvatar</DialogBox>
+		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩乙 </Character>
 		<Chinese>哎呀，我的贝壳都快输光了.....</Chinese>
 		<English>Oh, I’ve almost run out of seashells...</English>
@@ -166,7 +166,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>Normal</DialogBox>
+		<TextBoxType>Normal</TextBoxType>
 		<Character>小小水</Character>
 		<Expression>好奇</Expression>
 		<Chinese>为什么阿爸要用那个东西去看公告板上的字报呢？</Chinese>
@@ -183,7 +183,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>Normal</DialogBox>
+		<TextBoxType>Normal</TextBoxType>
 		<Character>小小水</Character>
 		<Expression>晕</Expression>
 		<Chinese>啊！好晕！</Chinese>
@@ -191,7 +191,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>Normal</DialogBox>
+		<TextBoxType>Normal</TextBoxType>
 		<Character>阿爸</Character>
 		<Expression>温柔</Expression>
 		<Chinese>这是叫远视镜，是阿爸的朋友从海外带回来的洋货。</Chinese>
@@ -213,7 +213,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>Normal</DialogBox>
+		<TextBoxType>Normal</TextBoxType>
 		<Character>阿爸</Character>
 		<Expression>温柔</Expression>
 		<Chinese>小水，不管以后怎样，阿爸始终会陪着你。</Chinese>
@@ -221,7 +221,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<DialogBox>Normal</DialogBox>
+		<TextBoxType>Normal</TextBoxType>
 		<Character>阿爸</Character>
 		<Expression>温柔</Expression>
 		<Chinese>替你看清前方……</Chinese>
