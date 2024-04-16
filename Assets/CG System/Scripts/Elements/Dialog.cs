@@ -83,10 +83,12 @@ namespace CG
             switch (storyLine.TextBoxType)
             {
                 case TextBoxType.Normal:
-                    // TODO: Set face and name strip
-                    string facePath = $"Characters/{storyLine.Character}";
+                    // TODO: Replace with Addressable Asset System
+                    string folderPath = "Assets/CG System/Art/Characters";
+                    string characterName = storyLine.Character;
+                    string facePath = $"{folderPath}/{characterName}/{characterName}-{storyLine.Expression}.png";
                     _face.sprite = Resources.Load<Sprite>(facePath);
-                    string nameStripPath = $"NameStrips/{storyLine.Character}";
+                    string nameStripPath = $"{folderPath}/NameStrips/{characterName}.png";
                     _nameStrip.sprite = Resources.Load<Sprite>(nameStripPath);
                     break;
                 case TextBoxType.NoAvatar:

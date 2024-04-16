@@ -1,10 +1,20 @@
 namespace CG
 {
+    internal enum CGState
+    {
+        None,
+        Playing,
+        Paused,
+        Waiting,
+        AutoPlaying,
+    }
+
     internal enum LineType
     {
         Scene,
         Narration,
         Dialog,
+        PlayAnimation,
     }
 
     internal enum TextBoxType

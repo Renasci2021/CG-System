@@ -34,7 +34,7 @@ namespace CG
             private readonly string TypeString;
 
             [XmlIgnore]
-            public LineType Type => Enum.TryParse(TypeString, true, out LineType type) ? type : LineType.Narration;
+            public LineType LineType => Enum.TryParse(TypeString, true, out LineType type) ? type : LineType.Narration;
 
             [XmlElement("TextBoxType")]
             private readonly string TextBoxTypeString;
