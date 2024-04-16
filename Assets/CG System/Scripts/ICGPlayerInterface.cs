@@ -1,5 +1,3 @@
-using System.Security.Cryptography;
-
 namespace CG
 {
     public interface ICGPlayerInterface

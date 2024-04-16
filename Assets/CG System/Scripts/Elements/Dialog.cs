@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +10,7 @@ namespace CG
 
     internal class Dialog : TextBlock
     {
-        [SerializeField] private Image[] _dialogBoxes; // 对话框数组
+        [SerializeField] private Sprite[] _dialogBoxes; // 对话框数组
 
         [SerializeField] private float _fadeSpeed = 1f; // 渐变速度
         [SerializeField] private float _fastForwardFadeSpeed = 10f; // 快进时渐变速度
@@ -80,7 +79,7 @@ namespace CG
         {
             base.InitializeLine(storyLine);
 
-            _dialogBox.sprite = _dialogBoxes[(int)storyLine.TextBoxType].sprite;
+            _dialogBox.sprite = _dialogBoxes[(int)storyLine.TextBoxType];
             switch (storyLine.TextBoxType)
             {
                 case TextBoxType.Normal:
