@@ -1,15 +1,6 @@
 namespace CG
 {
-    internal enum CGState
-    {
-        None,
-        Playing,
-        Paused,
-        Waiting,
-        AutoPlaying,
-    }
-
-    internal enum LineType
+    public enum LineType
     {
         Scene,
         Narration,
@@ -17,14 +8,14 @@ namespace CG
         PlayAnimation,
     }
 
-    internal enum TextBoxType
+    public enum TextBoxType
     {
         Normal,
         NoAvatar,
         ReserveAfterScene,
     }
 
-    internal enum EffectType
+    public enum EffectType
     {
         None,
     }
@@ -33,5 +24,14 @@ namespace CG
     {
         Chinese,
         English,
+    }
+
+    internal enum CGState
+    {
+        None,
+        Playing,
+        Paused,
+        Waiting,
+        AutoPlaying,
     }
 }

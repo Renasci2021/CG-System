@@ -155,6 +155,7 @@ namespace CG
 
         private void UpdateStoryLine()
         {
+            // TODO: Simply store StoryLine in a list
             _previousStoryLine = _storyLine;
             _storyLine = _xmlReader.NextLine;
         }

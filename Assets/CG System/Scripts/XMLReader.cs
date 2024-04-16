@@ -3,9 +3,9 @@ using System.Xml.Serialization;
 
 namespace CG
 {
-    internal class XMLReader
+    public class XMLReader
     {
-        private XMLLineList _lineList;
+        private XMLData _lineList;
 
         private int _lineIndex = 0;
 
@@ -22,53 +22,54 @@ namespace CG
 
         private void LoadXML(string filepath)
         {
-            XmlSerializer serializer = new(typeof(XMLLineList));
+            XmlSerializer serializer = new(typeof(XMLData));
             using System.IO.StreamReader streamReader = new(filepath);
-            _lineList = (XMLLineList)serializer.Deserialize(streamReader);
+            _lineList = (XMLData)serializer.Deserialize(streamReader);
+            // TODO: Write a StoryLine class and convert XMLLine to StoryLine
         }
 
         [Serializable]
         public class XMLLine
         {
             [XmlElement("Type")]
-            private readonly string TypeString;
+            public string TypeString;
 
             [XmlIgnore]
-            public LineType LineType => Enum.TryParse(TypeString, true, out LineType type) ? type : LineType.Narration;
+            public LineType LineType => Enum.TryParse(TypeString, true, out LineType type) ? type : throw new ArgumentException("Invalid Line Type");
 
             [XmlElement("TextBoxType")]
-            private readonly string TextBoxTypeString;
+            public string TextBoxTypeString;
 
             [XmlIgnore]
-            public TextBoxType TextBoxType => Enum.TryParse(TextBoxTypeString, true, out TextBoxType type) ? type : TextBoxType.Normal;
+            public TextBoxType TextBoxType => Enum.TryParse(TextBoxTypeString, true, out TextBoxType type) ? type : throw new ArgumentException("Invalid TextBox Type");
 
             [XmlElement("Character")]
-            public readonly string Character;
+            public string Character;
 
             [XmlElement("Expression")]
-            public readonly string Expression;
+            public string Expression;
 
             [XmlElement("Effect")]
-            private readonly string EffectString;
+            public string EffectString;
 
             [XmlIgnore]
             public EffectType Effect => Enum.TryParse(EffectString, true, out EffectType effect) ? effect : EffectType.None;
 
             [XmlElement("Interval")]
-            private readonly string IntervalString;
+            public string IntervalString;
 
             [XmlIgnore]
             public float Interval => float.TryParse(IntervalString, out float interval) ? interval : -1f;
 
             [XmlElement("Chinese")]
-            public readonly string ChineseText;
+            public string ChineseText;
 
             [XmlElement("English")]
-            public readonly string EnglishText;
+            public string EnglishText;
         }
 
         [Serializable]
-        private class XMLLineList
+        public class XMLData
         {
             [XmlElement("Line")]
             public XMLLine[] Lines;
