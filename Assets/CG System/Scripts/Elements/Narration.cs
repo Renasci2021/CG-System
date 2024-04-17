@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 namespace CG
 {
-    using StoryLine = XMLReader.XMLLine;
-
     internal class Narration : TextBlock
     {
         [SerializeField] private float _fadeSpeed = 1f; // 渐变速度

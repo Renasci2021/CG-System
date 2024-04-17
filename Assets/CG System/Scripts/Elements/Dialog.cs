@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 namespace CG
 {
-    using StoryLine = XMLReader.XMLLine;
-
     internal class Dialog : TextBlock
     {
         [SerializeField] private Sprite[] _dialogBoxes; // 对话框数组

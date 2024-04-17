@@ -6,8 +6,6 @@ using TMPro;
 
 namespace CG
 {
-    using StoryLine = XMLReader.XMLLine;
-
     internal abstract class TextBlock : MonoBehaviour
     {
         [SerializeField] protected Color _textColor = Color.black;

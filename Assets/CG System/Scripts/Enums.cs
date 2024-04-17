@@ -12,12 +12,14 @@ namespace CG
     {
         Normal,
         NoAvatar,
-        ReserveAfterScene,
+        DelayExit,
     }
 
-    public enum EffectType
+    public enum ContinuationMode
     {
-        None,
+        Interval,
+        Click,
+        Gesture,
     }
 
     public enum Language

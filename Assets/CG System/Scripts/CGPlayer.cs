@@ -9,15 +9,12 @@ using UnityEngine;
 
 namespace CG
 {
-    using StoryLine = XMLReader.XMLLine;
-
     public class CGPlayer : MonoBehaviour, ICGPlayerInterface
     {
         private string _chapterName;
         private XMLReader _xmlReader;
 
         private StoryLine _storyLine;
-        private StoryLine _previousStoryLine;
         private Scene[] _scenes;
         private Narration[] _narrations;
         private Dialog _dialog;
@@ -155,8 +152,6 @@ namespace CG
 
         private void UpdateStoryLine()
         {
-            // TODO: Simply store StoryLine in a list
-            _previousStoryLine = _storyLine;
             _storyLine = _xmlReader.NextLine;
         }
 
@@ -221,7 +216,7 @@ namespace CG
                 }
             }
 
-            var scene = _scenes[_currentSceneIndex++];
+            var scene = _scenes[++_currentSceneIndex];
             _narrations.AddRange(scene.GetComponentsInChildren<Narration>());
 
             await scene.Enter(_tokenSource.Token);

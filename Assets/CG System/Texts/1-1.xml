@@ -3,25 +3,28 @@
 <XMLData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Line>
 		<Type>Scene</Type>
-		<Interval>1</Interval>
+		<ContinuationMode>Interval</ContinuationMode>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Interval</ContinuationMode>
 		<Chinese>父亲的视力很好这件事，小水很小的时候就知道了。对于这件事，小水一直以来都是自豪且欣喜的。因为阿爸会带她在刚下过雨后的下午，一起去看大海，并在孩子们的比赛里大赚一笔。</Chinese>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>海边的沙滩上，孩子们紧张地挤在一起，手里攥着的是先前自己收集的漂亮贝壳，瞪大了眼睛巴望着远处的海平线。</Chinese>
 		<English>At the beach, the children crowded together, clutching beautiful seashells they had collected earlier. They gazed at the distant horizon eagerly.</English>
 	</Line>
 	<Line>
 		<Type>Scene</Type>
-		<Interval>1</Interval>
+		<ContinuationMode>Interval</ContinuationMode>
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
 		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩甲</Character>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>哎呀！你别挤我！反正现在船还没来，谁都看不到！</Chinese>
 		<English>Hey, don’t push me! The boat isn't here yet. Nobody can see it!</English>
 	</Line>
@@ -29,6 +32,7 @@
 		<Type>Dialog</Type>
 		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩乙</Character>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>我才没有挤你呢！……现在谁手里贝壳最多呀？</Chinese>
 		<English>I didn’t push you! So, who has the most seashells in their hands?</English>
 	</Line>
@@ -36,6 +40,7 @@
 		<Type>Dialog</Type>
 		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩丙</Character>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>肯定是小水啦，她每次都能说对编号……</Chinese>
 		<English>It must be Xiao Shui. She always gets the number right...</English>
 	</Line>
@@ -43,6 +48,7 @@
 		<Type>Dialog</Type>
 		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩甲</Character>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>我捡的好看的贝壳都被小水挑光了！</Chinese>
 		<English>Xiao Shui took all the pretty seashells I collected!</English>
 	</Line>
@@ -51,15 +57,17 @@
 		<TextBoxType>Normal</TextBoxType>
 		<Character>小小水</Character>
 		<Expression>普通</Expression>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>哼，谁让我阿爸有“千里眼”呢！那么远都可以看清船只的编码！</Chinese>
 		<English>Hah, who knows my dad have CLAIRVOYANCE! He can even see the boat's number from so far away!</English>
 	</Line>
 	<Line>
 		<Type>Scene</Type>
-		<Interval>1</Interval>
+		<ContinuationMode>Interval</ContinuationMode>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>随着船只的出现，孩子们沸腾起来，大家叽叽喳喳地猜这艘船的编码。第一个喊出来正确编码的人，就可以从其他人手里各拿走一个自己喜欢的贝壳当做奖励。</Chinese>
 		<English>As the boat emerged from the horizon, the children grew boisterous, and everyone tried to guess the boat's number. The first person to shout out the correct one got to pick one seashell from the others as a reward.</English>
 	</Line>
@@ -67,6 +75,7 @@
 		<Type>Dialog</Type>
 		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩甲</Character>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>是7868977！</Chinese>
 		<English>It’s 7868977!</English>
 	</Line>
@@ -74,18 +83,20 @@
 		<Type>Dialog</Type>
 		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩乙 </Character>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>不对！明明后面是811！</Chinese>
 		<English>No, it’s 811 at the end!</English>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Gesture</ContinuationMode>
 		<Chinese>小水很喜欢这个游戏，因为只要是有阿爸在的时候，小水的贝壳总是最多的，手里兜里都可以塞得满满当当。站在人群边缘的小水回头望向阿爸求助。</Chinese>
 		<English>Xiao Shui loved this game because whenever her dad was there, she always had the most seashells of the day. 
 She could even fill her hands and pockets. Xiao Shui, standing on the edge of the crowd, turned to her dad for help. </English>
 	</Line>
 	<Line>
 		<Type>Scene</Type>
-		<Interval>1</Interval>
+		<ContinuationMode>Interval</ContinuationMode>
 		<Chinese>只见阿爸眯起眼眺望一番，便笑眯眯地向小水打手势。</Chinese>
 		<English>Her dad squinted his eyes and then gestured towards her with a smile.</English>
 	</Line>
@@ -94,22 +105,25 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 		<TextBoxType>Normal</TextBoxType>
 		<Character>小小水</Character>
 		<Expression>大喊</Expression>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>是7966971！！</Chinese>
 		<English>It's 7966971!</English>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>浪花起起伏伏，孩子们逐渐安静下来，聚精会神地盯着远方。随着船只靠得足够近，船上的编码清晰地展现在众人面前。有孩子懊恼地喊了出来。</Chinese>
 		<English>With the waves rolling, the children grew quiet, focused on the horizon. As the boat came closer, its number became clear to everyone. One child shouted in frustration.</English>
 	</Line>
 	<Line>
 		<Type>Scene</Type>
-		<Interval>1</Interval>
+		<ContinuationMode>Interval</ContinuationMode>
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
 		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩甲</Character>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>真的是7966971！又是小水赢了！</Chinese>
 		<English>It's really 7966971! Xiao Shui won again!</English>
 	</Line>
@@ -117,50 +131,58 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 		<Type>Dialog</Type>
 		<TextBoxType>NoAvatar</TextBoxType>
 		<Character>小孩乙 </Character>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>哎呀，我的贝壳都快输光了.....</Chinese>
 		<English>Oh, I’ve almost run out of seashells...</English>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Interval</ContinuationMode>
 		<Chinese>孩子们一边抱怨着，一边把自己的贝壳拿出来让小水挑选。</Chinese>
 		<English>While the children complained, they took out their seashells for Xiao Shui to choose from. </English>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Interval</ContinuationMode>
 		<Chinese>在回家的路上，小水高兴地拎着满满一袋的小贝壳。贝壳在摇晃中相互碰撞，发出清脆悦耳的声音，如同夏夜虫鸣般动听。</Chinese>
 		<English>On the way back home, Xiao Shui friskily carried a bag full of small seashells. The shells jingled and clinked as they bumped into each other,
  creating a melodious sound like the chirping of insects on a summer night. </English>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
-		<Chinese>在小水心中，她的阿爸就是神话传说里有千里眼的神仙。 </Chinese>
+		<ContinuationMode>Click</ContinuationMode>
+		<Chinese>在小水心中，她的阿爸就是神话传说里有千里眼的神仙。</Chinese>
 		<English>In Xiao Shui's heart, her dad was like a mythical figure with clairvoyant powers.</English>
 	</Line>
 	<Line>
 		<Type>Scene</Type>
-		<Interval>1</Interval>
+		<ContinuationMode>Interval</ContinuationMode>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Interval</ContinuationMode>
 		<Chinese>但是阿爸也有点不一样的地方……阿爸总是看不清近处的东西，公告板上的字报、报刊亭的报纸、还有商铺旁贴的小单子……这些东西阿爸只有戴着眼镜才能看清认清。</Chinese>
 		<English>But her dad had one difference...He couldn't see things up close without wearing glasses; no matter it's the notice on the bulletin board, newspapers laid out on a newsstand or flyers pasted on walls of shops. </English>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>她觉得好奇怪，甚至曾经还偷偷戴过阿爸的眼镜，想看看这到底是多么神奇的一个物件，能让阿爸的眼睛在任何情况下都能清楚地看见事物！！</Chinese>
 		<English>She found it so strange and had even tried wearing her dad's glasses secretly, eagering to see the magic of the object that allowed her dad to see clearly under any circumstances.</English>
 	</Line>
 	<Line>
 		<Type>Scene</Type>
-		<Interval>1</Interval>
+		<ContinuationMode>Interval</ContinuationMode>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Interval</ContinuationMode>
 		<Chinese>记得有一天，小水陪着阿爸站在公告板的附近。</Chinese>
 		<English>Xiao Shui still recollects that one day she stood with her dad near the bulletin board. </English>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>她百无聊赖地踢着脚边的石子，看着石子滚向一边。她抬头看看阿爸，阿爸正戴着眼镜看着公告板上张贴的消息。</Chinese>
 		<English>She was bored, kicking stones at her feet and watching them roll along. She looked up at her dad who, in his glasses, was reading the posted messages.</English>
 	</Line>
@@ -169,15 +191,17 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 		<TextBoxType>Normal</TextBoxType>
 		<Character>小小水</Character>
 		<Expression>好奇</Expression>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>为什么阿爸要用那个东西去看公告板上的字报呢？</Chinese>
 		<English>Why does Dad use that thing to read the notices on the board?</English>
 	</Line>
 	<Line>
 		<Type>Scene</Type>
-		<Interval>1</Interval>
+		<ContinuationMode>Interval</ContinuationMode>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>小水几番伸手去够阿爸手里的眼镜，阿爸笑着把眼镜递了过去。</Chinese>
 		<English>Xiao Shui reached for her dad’s glasses a few times, and her dad smiled, handing her the glasses.</English>
 	</Line>
@@ -186,6 +210,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 		<TextBoxType>Normal</TextBoxType>
 		<Character>小小水</Character>
 		<Expression>晕</Expression>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>啊！好晕！</Chinese>
 		<English>Ah! It’s so dizzy!</English>
 	</Line>
@@ -194,20 +219,23 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 		<TextBoxType>Normal</TextBoxType>
 		<Character>阿爸</Character>
 		<Expression>温柔</Expression>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>这是叫远视镜，是阿爸的朋友从海外带回来的洋货。</Chinese>
 		<English>These are called binoculars. They're a foreign product brought back by a friend of dad from overseas.</English>
 	</Line>
 	<Line>
 		<Type>Scene</Type>
-		<Interval>1</Interval>
+		<ContinuationMode>Interval</ContinuationMode>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Interval</ContinuationMode>
 		<Chinese>阿爸把小水抱了起来，迎着夕阳往家走去。暖烘烘的阳光晒在小水身上，她逐渐泛起了困。</Chinese>
 		<English>Dad picked Xiao Shui up and they walked home in the warm sunlight. She gradually grew drowsy.</English>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>专治什么眼？什么货？小水其实一点都不在意。她舒服地吐了一口气，把头埋进阿爸的肩膀躲避刺眼的阳光。迷迷糊糊中，她听见阿爸的声音。</Chinese>
 		<English>What’s binoculars? What’s an overseas product? She didn't really care. The young little girl sighed comfortably and buried her head in her dad's shoulder to avoid the glaring sun. In a daze, she heard her dad’s voice.</English>
 	</Line>
@@ -216,6 +244,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 		<TextBoxType>Normal</TextBoxType>
 		<Character>阿爸</Character>
 		<Expression>温柔</Expression>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>小水，不管以后怎样，阿爸始终会陪着你。</Chinese>
 		<English>Xiao Shui, no matter what happens in the future, dad will always be there for you.</English>
 	</Line>
@@ -224,6 +253,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 		<TextBoxType>Normal</TextBoxType>
 		<Character>阿爸</Character>
 		<Expression>温柔</Expression>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>替你看清前方……</Chinese>
 		<English>To help you make out what's ahead...</English>
 	</Line>

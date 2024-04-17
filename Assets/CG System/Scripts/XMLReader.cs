@@ -3,6 +3,17 @@ using System.Xml.Serialization;
 
 namespace CG
 {
+    public record StoryLine(XMLReader.XMLLine Line)
+    {
+        public LineType LineType => (LineType)Enum.Parse(typeof(LineType), Line.TypeString);
+        public TextBoxType TextBoxType => (TextBoxType)Enum.Parse(typeof(TextBoxType), Line.TextBoxTypeString);
+        public string Character => Line.Character;
+        public string Expression => Line.Expression;
+        public ContinuationMode ContinuationMode => (ContinuationMode)Enum.Parse(typeof(ContinuationMode), Line.ContinuationModeString);
+        public string ChineseText => Line.ChineseText;
+        public string EnglishText => Line.EnglishText;
+    }
+
     public class XMLReader
     {
         private XMLData _lineList;
@@ -12,7 +23,20 @@ namespace CG
         // TODO: Replace with Addressable Asset System
         private readonly string _folderPath = "Assets/CG System/Texts/";
 
-        public XMLLine NextLine => _lineIndex < _lineList.Lines.Length ? _lineList.Lines[_lineIndex++] : null;
+        public StoryLine NextLine
+        {
+            get
+            {
+                if (_lineIndex < _lineList.Lines.Length)
+                {
+                    return new(_lineList.Lines[_lineIndex++]);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 
         public XMLReader(string chapterName)
         {
@@ -25,7 +49,6 @@ namespace CG
             XmlSerializer serializer = new(typeof(XMLData));
             using System.IO.StreamReader streamReader = new(filepath);
             _lineList = (XMLData)serializer.Deserialize(streamReader);
-            // TODO: Write a StoryLine class and convert XMLLine to StoryLine
         }
 
         [Serializable]
@@ -34,14 +57,8 @@ namespace CG
             [XmlElement("Type")]
             public string TypeString;
 
-            [XmlIgnore]
-            public LineType LineType => Enum.TryParse(TypeString, true, out LineType type) ? type : throw new ArgumentException("Invalid Line Type");
-
             [XmlElement("TextBoxType")]
             public string TextBoxTypeString;
-
-            [XmlIgnore]
-            public TextBoxType TextBoxType => Enum.TryParse(TextBoxTypeString, true, out TextBoxType type) ? type : throw new ArgumentException("Invalid TextBox Type");
 
             [XmlElement("Character")]
             public string Character;
@@ -49,17 +66,8 @@ namespace CG
             [XmlElement("Expression")]
             public string Expression;
 
-            [XmlElement("Effect")]
-            public string EffectString;
-
-            [XmlIgnore]
-            public EffectType Effect => Enum.TryParse(EffectString, true, out EffectType effect) ? effect : EffectType.None;
-
-            [XmlElement("Interval")]
-            public string IntervalString;
-
-            [XmlIgnore]
-            public float Interval => float.TryParse(IntervalString, out float interval) ? interval : -1f;
+            [XmlElement("ContinuationMode")]
+            public string ContinuationModeString;
 
             [XmlElement("Chinese")]
             public string ChineseText;
@@ -75,4 +83,10 @@ namespace CG
             public XMLLine[] Lines;
         }
     }
+}
+
+namespace System.Runtime.CompilerServices
+{
+    // * This attribute allows records to be used in Unity 2019.4 LTS
+    internal class IsExternalInit { }
 }
