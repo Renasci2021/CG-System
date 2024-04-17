@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -85,9 +86,9 @@ namespace CG
                     string folderPath = "Assets/CG System/Art/Characters";
                     string characterName = storyLine.Character;
                     string facePath = $"{folderPath}/{characterName}/{characterName}-{storyLine.Expression}.png";
-                    _face.sprite = Resources.Load<Sprite>(facePath);
+                    _face.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(facePath);
                     string nameStripPath = $"{folderPath}/NameStrips/{characterName}.png";
-                    _nameStrip.sprite = Resources.Load<Sprite>(nameStripPath);
+                    _nameStrip.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(nameStripPath);
                     break;
                 case TextBoxType.NoAvatar:
                     _face.sprite = null;

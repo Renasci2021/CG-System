@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Sirenix.Utilities;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 namespace CG
@@ -91,31 +92,34 @@ namespace CG
             }
         }
 
-        public TMP_FontAsset FontAsset { get; private set; }
+        public TMP_FontAsset FontAsset { get; private set; } = null;
 
-        public void Initialize(string chapterName)
+        public async UniTask Initialize(string chapterName)
         {
             _chapterName = chapterName;
             _xmlReader = new XMLReader(chapterName);
             // TODO: Replace with Addressable Reference
-            FontAsset = Resources.Load<TMP_FontAsset>($"Fonts/{chapterName}.asset");
+            FontAsset = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>($"Assets/CG System/Fonts/{chapterName}.asset");
+            await UniTask.WaitUntil(() => FontAsset != null);
 
-            var canvasObject = GameObject.Find("Canvas");
-            _scenes = canvasObject.GetComponentsInChildren<Scene>();
+            // * true: include inactive objects
+            _scenes = GameObject.Find("Canvas").GetComponentsInChildren<Scene>(true);
             _dialog = GetComponentInChildren<Dialog>();
         }
 
         public void Play()
         {
-            _tokenSource = new();
             _state = CGState.Playing;
             _storyLine = _xmlReader.NextLine;
+
+            _tokenSource = new();
             PlayStoryLine();
         }
 
         public void Pause()
         {
             _tokenSource.Cancel();
+
             _previousState = _state;
             _state = CGState.Paused;
         }
@@ -140,20 +144,11 @@ namespace CG
             _tokenSource.Cancel();
         }
 
-        public void HideText()
-        {
-            OnHideTextAndUI?.Invoke();
-        }
+        public void HideText() => OnHideTextAndUI?.Invoke();
 
-        public void ShowText()
-        {
-            OnShowTextAndUI?.Invoke();
-        }
+        public void ShowText() => OnShowTextAndUI?.Invoke();
 
-        private void UpdateStoryLine()
-        {
-            _storyLine = _xmlReader.NextLine;
-        }
+        private void UpdateStoryLine() => _storyLine = _xmlReader.NextLine;
 
         private async void PlayStoryLine()
         {
@@ -217,7 +212,9 @@ namespace CG
             }
 
             var scene = _scenes[++_currentSceneIndex];
-            _narrations.AddRange(scene.GetComponentsInChildren<Narration>());
+            // * true: include inactive objects
+            _narrations = scene.GetComponentsInChildren<Narration>(true);
+            _currentNarrationIndex = 0;
 
             await scene.Enter(_tokenSource.Token);
             if (_tokenSource.Token.IsCancellationRequested)
@@ -228,7 +225,7 @@ namespace CG
 
         private async UniTask PlayNarration()
         {
-            var narration = _narrations[++_currentNarrationIndex];
+            var narration = _narrations[_currentNarrationIndex++];
             narration.Initialize(this);
 
             await narration.Enter(_storyLine, _tokenSource.Token);

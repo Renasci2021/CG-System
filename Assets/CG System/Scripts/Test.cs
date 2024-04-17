@@ -8,11 +8,11 @@ public class Test : MonoBehaviour
     private void Awake()
     {
         _player = FindObjectOfType<CGPlayer>();
-        _player.Initialize("1-1");
     }
 
-    private void Start()
+    private async void Start()
     {
+        await _player.Initialize("1-1");
         _player.Play();
     }
 }

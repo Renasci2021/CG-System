@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 
 namespace CG
 {
@@ -15,7 +16,7 @@ namespace CG
         event Action OnHideTextAndUI;
         event Action OnShowTextAndUI;
 
-        void Initialize(string chapterName);
+        UniTask Initialize(string chapterName);
         void Play();
         void Pause();
         void Resume();
