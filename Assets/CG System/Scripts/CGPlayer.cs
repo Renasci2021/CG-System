@@ -30,6 +30,7 @@ namespace CG
 
         private bool _needReserveNarration = false;
 
+        private delegate UniTask PlayMethod(CancellationToken token);
         private CancellationTokenSource _tokenSource;
 
         public event Action OnAutoPlayChanged;
@@ -102,9 +103,11 @@ namespace CG
             FontAsset = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>($"Assets/CG System/Fonts/{chapterName}.asset");
             await UniTask.WaitUntil(() => FontAsset != null);
 
-            // * true: include inactive objects
-            _scenes = GameObject.Find("Canvas").GetComponentsInChildren<Scene>(true);
-            _dialog = GetComponentInChildren<Dialog>();
+            // * param true: include inactive objects
+            var canvasObject = GameObject.Find("Canvas");
+            _scenes = canvasObject.GetComponentsInChildren<Scene>(true);
+            _dialog = canvasObject.GetComponentInChildren<Dialog>(true);
+            _dialog.Initialize(this);
         }
 
         public void Play()
@@ -190,20 +193,20 @@ namespace CG
         {
             if (_currentSceneIndex != -1)
             {
-                List<UniTask> tasks = new(2 + _narrations.Length)
-                {
-                    _scenes[_currentSceneIndex].Exit(_tokenSource.Token),
-                    _dialog.Exit(_tokenSource.Token)
-                };
+                List<PlayMethod> playMethods = new();
+                playMethods.Add(_scenes[_currentSceneIndex].Exit);
+                playMethods.Add(_dialog.Exit);
                 if (!_needReserveNarration)
                 {
-                    _narrations.ForEach(narration => tasks.Add(narration.Exit(_tokenSource.Token)));
+                    _narrations.ForEach(narration => playMethods.Add(narration.Exit));
                 }
                 else
                 {
                     _needReserveNarration = false;
                 }
 
+                var tasks = new List<UniTask>(playMethods.Count);
+                playMethods.ForEach(playMethod => tasks.Add(playMethod(_tokenSource.Token)));
                 await UniTask.WhenAll(tasks);
                 if (_tokenSource.Token.IsCancellationRequested)
                 {
@@ -212,7 +215,7 @@ namespace CG
             }
 
             var scene = _scenes[++_currentSceneIndex];
-            // * true: include inactive objects
+            // * param true: include inactive objects
             _narrations = scene.GetComponentsInChildren<Narration>(true);
             _currentNarrationIndex = 0;
 

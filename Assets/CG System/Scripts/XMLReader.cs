@@ -5,11 +5,14 @@ namespace CG
 {
     public record StoryLine(XMLReader.XMLLine Line)
     {
-        public LineType LineType => (LineType)Enum.Parse(typeof(LineType), Line.TypeString);
-        public TextBoxType TextBoxType => (TextBoxType)Enum.Parse(typeof(TextBoxType), Line.TextBoxTypeString);
+        public LineType LineType =>
+            (LineType)Enum.Parse(typeof(LineType), Line.TypeString);
+        public TextBoxType TextBoxType =>
+            (TextBoxType)Enum.Parse(typeof(TextBoxType), Line.TextBoxTypeString);
         public string Character => Line.Character;
         public string Expression => Line.Expression;
-        public ContinuationMode ContinuationMode => (ContinuationMode)Enum.Parse(typeof(ContinuationMode), Line.ContinuationModeString);
+        public ContinuationMode ContinuationMode =>
+            (ContinuationMode)Enum.Parse(typeof(ContinuationMode), Line.ContinuationModeString);
         public string ChineseText => Line.ChineseText;
         public string EnglishText => Line.EnglishText;
     }

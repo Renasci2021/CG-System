@@ -101,6 +101,10 @@ namespace CG
         {
             base.Awake();
             _image = GetComponent<Image>();
+
+            Color color = _image.color;
+            color.a = 0f;
+            _image.color = color;
             gameObject.SetActive(false);
         }
     }

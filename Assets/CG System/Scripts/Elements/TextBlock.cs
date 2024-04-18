@@ -21,7 +21,7 @@ namespace CG
             set => _textMeshPro.text = value;
         }
 
-        public void Initialize(CGPlayer player)
+        public virtual void Initialize(CGPlayer player)
         {
             _player = player;
             _textMeshPro.font = _player.FontAsset;
@@ -45,7 +45,8 @@ namespace CG
 
         protected virtual void Awake()
         {
-            _textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
+            // * param true: include inactive objects
+            _textMeshPro = GetComponentInChildren<TextMeshProUGUI>(true);
         }
 
         protected virtual void InitializeLine(StoryLine storyLine)

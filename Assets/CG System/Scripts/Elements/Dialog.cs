@@ -24,6 +24,18 @@ namespace CG
         private bool _isEntering = false;
         private bool _isExiting = false;
 
+        public override void Initialize(CGPlayer player)
+        {
+            base.Initialize(player);
+
+            Color color = Color.white;
+            color.a = 0f;
+            _dialogBox.color = color;
+            _face.color = color;
+            _nameStrip.color = color;
+            gameObject.SetActive(false);
+        }
+
         public override async UniTask Enter(StoryLine storyLine, CancellationToken token)
         {
             if (_isShowing)
@@ -35,6 +47,7 @@ namespace CG
             else
             {
                 InitializeLine(storyLine);
+                gameObject.SetActive(true);
                 _isShowing = true;
                 await _animator.FadeIn(token);
             }
@@ -45,6 +58,7 @@ namespace CG
         public override async UniTask Exit(CancellationToken token)
         {
             await _animator.FadeOut(token);
+            gameObject.SetActive(false);
         }
 
         public override void Skip()
@@ -78,21 +92,25 @@ namespace CG
         {
             base.InitializeLine(storyLine);
 
-            _dialogBox.sprite = _dialogBoxes[(int)storyLine.TextBoxType];
+            // TODO: Replace with Addressable Asset System
+            string folderPath = "Assets/CG System/Art/Characters";
+            string characterName = storyLine.Character;
+            string facePath, nameStripPath;
             switch (storyLine.TextBoxType)
             {
                 case TextBoxType.Normal:
-                    // TODO: Replace with Addressable Asset System
-                    string folderPath = "Assets/CG System/Art/Characters";
-                    string characterName = storyLine.Character;
-                    string facePath = $"{folderPath}/{characterName}/{characterName}-{storyLine.Expression}.png";
+                    _dialogBox.sprite = _dialogBoxes[(int)TextBoxType.Normal];
+                    facePath = $"{folderPath}/{characterName}/{characterName}-{storyLine.Expression}.png";
                     _face.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(facePath);
-                    string nameStripPath = $"{folderPath}/NameStrips/{characterName}.png";
+                    nameStripPath = $"{folderPath}/NameStrips/{characterName}.png";
                     _nameStrip.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(nameStripPath);
                     break;
                 case TextBoxType.NoAvatar:
+                    _dialogBox.sprite = _dialogBoxes[(int)TextBoxType.NoAvatar];
                     _face.sprite = null;
-                    _nameStrip.sprite = null;
+                    _face.color = Color.clear;
+                    nameStripPath = $"{folderPath}/NameStrips/{characterName}.png";
+                    _nameStrip.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(nameStripPath);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(
@@ -114,9 +132,9 @@ namespace CG
             public void ImmediateShow()
             {
                 _dialog._dialogBox.color = Color.white;
-                _dialog._face.color = Color.white;
-                _dialog._nameStrip.color = Color.white;
                 _dialog._textMeshPro.color = _dialog._textColor;
+                _dialog._face.color = _dialog._face.sprite != null ? Color.white : Color.clear;
+                _dialog._nameStrip.color = _dialog._nameStrip.sprite != null ? Color.white : Color.clear;
             }
 
             public void ImmediateHide()
@@ -129,6 +147,7 @@ namespace CG
 
             public async UniTask FadeIn(CancellationToken token)
             {
+                _dialog._isEntering = true;
                 Color imageColor = _dialog._dialogBox.color;
 
                 while (true)
@@ -140,6 +159,7 @@ namespace CG
 
                     if (imageColor.a >= 1f)
                     {
+                        _dialog._isEntering = false;
                         imageColor.a = 1f;
                         _dialog._dialogBox.color = imageColor;
                         break;
@@ -161,6 +181,7 @@ namespace CG
 
             public async UniTask FadeOut(CancellationToken token)
             {
+                _dialog._isExiting = true;
                 Color imageColor = _dialog._dialogBox.color;
                 Color textColor = _dialog._textMeshPro.color;
 
