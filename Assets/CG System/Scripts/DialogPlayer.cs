@@ -21,7 +21,7 @@ namespace CG
 
         public async UniTask Enter(StoryLine storyLine, CancellationToken token)
         {
-            _nextDialog = _dialogs[(int)storyLine.TextBoxType];
+            _nextDialog = _dialogs[(int)storyLine.DialogBoxType];
             _nextDialog.InitializeLine(storyLine);
             if (_currentDialog != null)
             {

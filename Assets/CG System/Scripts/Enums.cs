@@ -8,11 +8,10 @@ namespace CG
         PlayAnimation,
     }
 
-    public enum TextBoxType
+    public enum DialogBoxType
     {
         Normal,
         NoAvatar,
-        DelayExit,
     }
 
     public enum ContinuationMode

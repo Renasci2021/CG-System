@@ -19,10 +19,11 @@
 	<Line>
 		<Type>Scene</Type>
 		<ContinuationMode>Interval</ContinuationMode>
+		<ClearText>true</ClearText>
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>NoAvatar</TextBoxType>
+		<DialogBoxType>NoAvatar</DialogBoxType>
 		<Character>小孩甲</Character>
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>哎呀！你别挤我！反正现在船还没来，谁都看不到！</Chinese>
@@ -30,7 +31,7 @@
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>NoAvatar</TextBoxType>
+		<DialogBoxType>NoAvatar</DialogBoxType>
 		<Character>小孩乙</Character>
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>我才没有挤你呢！……现在谁手里贝壳最多呀？</Chinese>
@@ -38,7 +39,7 @@
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>NoAvatar</TextBoxType>
+		<DialogBoxType>NoAvatar</DialogBoxType>
 		<Character>小孩丙</Character>
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>肯定是小水啦，她每次都能说对编号……</Chinese>
@@ -46,7 +47,7 @@
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>NoAvatar</TextBoxType>
+		<DialogBoxType>NoAvatar</DialogBoxType>
 		<Character>小孩甲</Character>
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>我捡的好看的贝壳都被小水挑光了！</Chinese>
@@ -54,7 +55,7 @@
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>Normal</TextBoxType>
+		<DialogBoxType>Normal</DialogBoxType>
 		<Character>小小水</Character>
 		<Expression>普通</Expression>
 		<ContinuationMode>Click</ContinuationMode>
@@ -73,7 +74,7 @@
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>NoAvatar</TextBoxType>
+		<DialogBoxType>NoAvatar</DialogBoxType>
 		<Character>小孩甲</Character>
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>是7868977！</Chinese>
@@ -81,7 +82,7 @@
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>NoAvatar</TextBoxType>
+		<DialogBoxType>NoAvatar</DialogBoxType>
 		<Character>小孩乙</Character>
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>不对！明明后面是811！</Chinese>
@@ -95,8 +96,13 @@
 She could even fill her hands and pockets. Xiao Shui, standing on the edge of the crowd, turned to her dad for help. </English>
 	</Line>
 	<Line>
+		<Type>PlayAnimation</Type>
+		<ContinuationMode>Interval</ContinuationMode>
+	</Line>
+	<Line>
 		<Type>Scene</Type>
 		<ContinuationMode>Interval</ContinuationMode>
+		<ClearText>true</ClearText>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
@@ -105,17 +111,17 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 		<English>Her dad squinted his eyes and then gestured towards her with a smile.</English>
 	</Line>
 	<Line>
+		<Type>PlayAnimation</Type>
+		<ContinuationMode>Interval</ContinuationMode>
+	</Line>
+	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>Normal</TextBoxType>
+		<DialogBoxType>Normal</DialogBoxType>
 		<Character>小小水</Character>
 		<Expression>大喊</Expression>
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>是7966971！！</Chinese>
 		<English>It's 7966971!</English>
-	</Line>
-	<Line>
-		<Type>Scene</Type>
-		<ContinuationMode>Interval</ContinuationMode>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
@@ -126,10 +132,11 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	<Line>
 		<Type>Scene</Type>
 		<ContinuationMode>Interval</ContinuationMode>
+		<ClearText>true</ClearText>
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>NoAvatar</TextBoxType>
+		<DialogBoxType>NoAvatar</DialogBoxType>
 		<Character>小孩甲</Character>
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>真的是7966971！又是小水赢了！</Chinese>
@@ -137,7 +144,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>NoAvatar</TextBoxType>
+		<DialogBoxType>NoAvatar</DialogBoxType>
 		<Character>小孩乙</Character>
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>哎呀，我的贝壳都快输光了.....</Chinese>
@@ -165,6 +172,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	<Line>
 		<Type>Scene</Type>
 		<ContinuationMode>Interval</ContinuationMode>
+		<ClearText>true</ClearText>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
@@ -181,6 +189,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	<Line>
 		<Type>Scene</Type>
 		<ContinuationMode>Interval</ContinuationMode>
+		<ClearText>true</ClearText>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
@@ -189,7 +198,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 		<English>Xiao Shui still recollects that one day she stood with her dad near the bulletin board. </English>
 	</Line>
 	<Line>
-		<Type>Scene</Type>
+		<Type>PlayAnimation</Type>
 		<ContinuationMode>Interval</ContinuationMode>
 	</Line>
 	<Line>
@@ -200,7 +209,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>Normal</TextBoxType>
+		<DialogBoxType>Normal</DialogBoxType>
 		<Character>小小水</Character>
 		<Expression>好奇</Expression>
 		<ContinuationMode>Click</ContinuationMode>
@@ -216,10 +225,11 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	<Line>
 		<Type>Scene</Type>
 		<ContinuationMode>Interval</ContinuationMode>
+		<ClearText>true</ClearText>
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>Normal</TextBoxType>
+		<DialogBoxType>Normal</DialogBoxType>
 		<Character>小小水</Character>
 		<Expression>晕</Expression>
 		<ContinuationMode>Click</ContinuationMode>
@@ -228,7 +238,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>Normal</TextBoxType>
+		<DialogBoxType>Normal</DialogBoxType>
 		<Character>阿爸</Character>
 		<Expression>温柔</Expression>
 		<ContinuationMode>Click</ContinuationMode>
@@ -253,16 +263,17 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>Normal</TextBoxType>
+		<DialogBoxType>Normal</DialogBoxType>
 		<Character>阿爸</Character>
 		<Expression>温柔</Expression>
 		<ContinuationMode>Click</ContinuationMode>
+		<ClearText>true</ClearText>
 		<Chinese>小水，不管以后怎样，阿爸始终会陪着你。</Chinese>
 		<English>Xiao Shui, no matter what happens in the future, dad will always be there for you.</English>
 	</Line>
 	<Line>
 		<Type>Dialog</Type>
-		<TextBoxType>Normal</TextBoxType>
+		<DialogBoxType>Normal</DialogBoxType>
 		<Character>阿爸</Character>
 		<Expression>温柔</Expression>
 		<ContinuationMode>Click</ContinuationMode>

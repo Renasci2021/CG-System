@@ -12,7 +12,7 @@ namespace CG
         // [SerializeField] private float _fadeSpeed = 1f; // 渐变速度
         // [SerializeField] private float _fastForwardFadeSpeed = 10f; // 快进时渐变速度
 
-        [SerializeField] private TextBoxType _textBoxType;
+        [SerializeField] private DialogBoxType _textBoxType;
         [SerializeField] private Image _dialogBox = null;
         [SerializeField] private Image _face = null;
         [SerializeField] private Image _nameStrip = null;
@@ -122,7 +122,7 @@ namespace CG
             color.a = 0f;
             switch (_textBoxType)
             {
-                case TextBoxType.Normal:
+                case DialogBoxType.Normal:
                     _dialogBox = images[0];
                     _face = images[1];
                     _nameStrip = images[2];
@@ -130,7 +130,7 @@ namespace CG
                     _face.color = color;
                     _nameStrip.color = color;
                     break;
-                case TextBoxType.NoAvatar:
+                case DialogBoxType.NoAvatar:
                     _dialogBox = images[0];
                     _nameStrip = images[1];
                     _dialogBox.color = color;

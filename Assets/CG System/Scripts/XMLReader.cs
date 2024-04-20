@@ -7,12 +7,14 @@ namespace CG
     {
         public LineType LineType =>
             (LineType)Enum.Parse(typeof(LineType), Line.TypeString);
-        public TextBoxType TextBoxType =>
-            (TextBoxType)Enum.Parse(typeof(TextBoxType), Line.TextBoxTypeString);
+        public DialogBoxType DialogBoxType =>
+            (DialogBoxType)Enum.Parse(typeof(DialogBoxType), Line.DialogBoxTypeString);
         public string Character => Line.Character;
         public string Expression => Line.Expression;
         public ContinuationMode ContinuationMode =>
             (ContinuationMode)Enum.Parse(typeof(ContinuationMode), Line.ContinuationModeString);
+        public bool NeedClearNarrations =>
+            bool.Parse(Line.ClearTextString ?? "false");
         public string ChineseText => Line.ChineseText;
         public string EnglishText => Line.EnglishText;
     }
@@ -60,8 +62,8 @@ namespace CG
             [XmlElement("Type")]
             public string TypeString;
 
-            [XmlElement("TextBoxType")]
-            public string TextBoxTypeString;
+            [XmlElement("DialogBoxType")]
+            public string DialogBoxTypeString;
 
             [XmlElement("Character")]
             public string Character;
@@ -71,6 +73,9 @@ namespace CG
 
             [XmlElement("ContinuationMode")]
             public string ContinuationModeString;
+
+            [XmlElement("ClearText")]
+            public string ClearTextString;
 
             [XmlElement("Chinese")]
             public string ChineseText;
