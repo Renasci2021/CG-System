@@ -82,7 +82,7 @@
 	<Line>
 		<Type>Dialog</Type>
 		<TextBoxType>NoAvatar</TextBoxType>
-		<Character>小孩乙 </Character>
+		<Character>小孩乙</Character>
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>不对！明明后面是811！</Chinese>
 		<English>No, it’s 811 at the end!</English>
@@ -97,6 +97,10 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	<Line>
 		<Type>Scene</Type>
 		<ContinuationMode>Interval</ContinuationMode>
+	</Line>
+	<Line>
+		<Type>Narration</Type>
+		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>只见阿爸眯起眼眺望一番，便笑眯眯地向小水打手势。</Chinese>
 		<English>Her dad squinted his eyes and then gestured towards her with a smile.</English>
 	</Line>
@@ -108,6 +112,10 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>是7966971！！</Chinese>
 		<English>It's 7966971!</English>
+	</Line>
+	<Line>
+		<Type>Scene</Type>
+		<ContinuationMode>Interval</ContinuationMode>
 	</Line>
 	<Line>
 		<Type>Narration</Type>
@@ -130,7 +138,7 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 	<Line>
 		<Type>Dialog</Type>
 		<TextBoxType>NoAvatar</TextBoxType>
-		<Character>小孩乙 </Character>
+		<Character>小孩乙</Character>
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>哎呀，我的贝壳都快输光了.....</Chinese>
 		<English>Oh, I’ve almost run out of seashells...</English>
@@ -181,6 +189,10 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 		<English>Xiao Shui still recollects that one day she stood with her dad near the bulletin board. </English>
 	</Line>
 	<Line>
+		<Type>Scene</Type>
+		<ContinuationMode>Interval</ContinuationMode>
+	</Line>
+	<Line>
 		<Type>Narration</Type>
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>她百无聊赖地踢着脚边的石子，看着石子滚向一边。她抬头看看阿爸，阿爸正戴着眼镜看着公告板上张贴的消息。</Chinese>
@@ -196,14 +208,14 @@ She could even fill her hands and pockets. Xiao Shui, standing on the edge of th
 		<English>Why does Dad use that thing to read the notices on the board?</English>
 	</Line>
 	<Line>
-		<Type>Scene</Type>
-		<ContinuationMode>Interval</ContinuationMode>
-	</Line>
-	<Line>
 		<Type>Narration</Type>
 		<ContinuationMode>Click</ContinuationMode>
 		<Chinese>小水几番伸手去够阿爸手里的眼镜，阿爸笑着把眼镜递了过去。</Chinese>
 		<English>Xiao Shui reached for her dad’s glasses a few times, and her dad smiled, handing her the glasses.</English>
+	</Line>
+	<Line>
+		<Type>Scene</Type>
+		<ContinuationMode>Interval</ContinuationMode>
 	</Line>
 	<Line>
 		<Type>Dialog</Type>

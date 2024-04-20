@@ -7,7 +7,7 @@ namespace CG
 {
     internal class Narration : TextBlock
     {
-        [SerializeField] private float _fadeSpeed = 1f; // 渐变速度
+        [SerializeField] private float _fadeSpeed = 2f; // 渐变速度
         [SerializeField] private float _fastForwardFadeSpeed = 10f; // 快进时渐变速度
 
         private Image _image;   // 旁白框
@@ -15,9 +15,8 @@ namespace CG
         private bool _isEntering = false;
         private bool _isExiting = false;
 
-        public override async UniTask Enter(StoryLine storyLine, CancellationToken token)
+        public override async UniTask Enter(CancellationToken token)
         {
-            InitializeLine(storyLine);
             gameObject.SetActive(true);
             _isEntering = true;
             Color imageColor = _image.color;
@@ -102,7 +101,7 @@ namespace CG
             base.Awake();
             _image = GetComponent<Image>();
 
-            Color color = _image.color;
+            Color color = Color.white;
             color.a = 0f;
             _image.color = color;
             gameObject.SetActive(false);

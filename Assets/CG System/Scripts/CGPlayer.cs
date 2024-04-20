@@ -18,7 +18,7 @@ namespace CG
         private StoryLine _storyLine;
         private Scene[] _scenes;
         private Narration[] _narrations;
-        private Dialog _dialog;
+        private DialogPlayer _dialogPlayer;
         private int _currentSceneIndex = -1;
         private int _currentNarrationIndex;
 
@@ -106,8 +106,8 @@ namespace CG
             // * param true: include inactive objects
             var canvasObject = GameObject.Find("Canvas");
             _scenes = canvasObject.GetComponentsInChildren<Scene>(true);
-            _dialog = canvasObject.GetComponentInChildren<Dialog>(true);
-            _dialog.Initialize(this);
+            _dialogPlayer = canvasObject.GetComponentInChildren<DialogPlayer>(true);
+            _dialogPlayer.Initialize(this);
         }
 
         public void Play()
@@ -193,9 +193,11 @@ namespace CG
         {
             if (_currentSceneIndex != -1)
             {
-                List<PlayMethod> playMethods = new();
-                playMethods.Add(_scenes[_currentSceneIndex].Exit);
-                playMethods.Add(_dialog.Exit);
+                List<PlayMethod> playMethods = new()
+                {
+                    _scenes[_currentSceneIndex].Exit,
+                    _dialogPlayer.Exit
+                };
                 if (!_needReserveNarration)
                 {
                     _narrations.ForEach(narration => playMethods.Add(narration.Exit));
@@ -228,10 +230,19 @@ namespace CG
 
         private async UniTask PlayNarration()
         {
+            await _dialogPlayer.Exit(_tokenSource.Token);
+            if (_tokenSource.Token.IsCancellationRequested)
+            {
+                return;
+            }
+
+            // FIXME: Pause will cause out of index
+            // Use UniTask.WaitUntil to implement pause
             var narration = _narrations[_currentNarrationIndex++];
             narration.Initialize(this);
+            narration.InitializeLine(_storyLine);
 
-            await narration.Enter(_storyLine, _tokenSource.Token);
+            await narration.Enter(_tokenSource.Token);
             if (_tokenSource.Token.IsCancellationRequested)
             {
                 return;
@@ -242,15 +253,22 @@ namespace CG
         {
             if (!_needReserveNarration)
             {
-                List<UniTask> tasks = new(_narrations.Length);
-                _narrations.ForEach(narration => tasks.Add(narration.Exit(_tokenSource.Token)));
+                List<PlayMethod> playMethods = new();
+                _narrations.ForEach(Narration => playMethods.Add(Narration.Exit));
+                var tasks = new List<UniTask>(playMethods.Count);
+                playMethods.ForEach(playMethod => tasks.Add(playMethod(_tokenSource.Token)));
+                await UniTask.WhenAll(tasks);
+                if (_tokenSource.Token.IsCancellationRequested)
+                {
+                    return;
+                }
             }
             else
             {
                 _needReserveNarration = false;
             }
 
-            await _dialog.Enter(_storyLine, _tokenSource.Token);
+            await _dialogPlayer.Enter(_storyLine, _tokenSource.Token);
             if (_tokenSource.Token.IsCancellationRequested)
             {
                 return;

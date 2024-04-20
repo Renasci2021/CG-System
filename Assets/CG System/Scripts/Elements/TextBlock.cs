@@ -29,7 +29,20 @@ namespace CG
             _textMeshPro.maxVisibleCharacters = 0;
         }
 
-        public abstract UniTask Enter(StoryLine storyLine, CancellationToken token);
+        public virtual void InitializeLine(StoryLine storyLine)
+        {
+            Text = _player.Language switch
+            {
+                Language.English => storyLine.EnglishText,
+                Language.Chinese => storyLine.ChineseText,
+                _ => throw new ArgumentOutOfRangeException(
+                    nameof(_player.Language),
+                    $"The specified language '{_player.Language}' is not allowed."
+                )
+            };
+        }
+
+        public abstract UniTask Enter(CancellationToken token);
         public abstract UniTask Exit(CancellationToken token);
         public abstract void Skip();
 
@@ -47,19 +60,6 @@ namespace CG
         {
             // * param true: include inactive objects
             _textMeshPro = GetComponentInChildren<TextMeshProUGUI>(true);
-        }
-
-        protected virtual void InitializeLine(StoryLine storyLine)
-        {
-            Text = _player.Language switch
-            {
-                Language.English => storyLine.EnglishText,
-                Language.Chinese => storyLine.ChineseText,
-                _ => throw new ArgumentOutOfRangeException(
-                    nameof(_player.Language),
-                    $"The specified language '{_player.Language}' is not allowed."
-                )
-            };
         }
 
         protected async UniTask TypeText(CancellationToken token)
