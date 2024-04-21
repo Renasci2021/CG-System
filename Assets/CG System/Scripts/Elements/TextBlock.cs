@@ -64,19 +64,25 @@ namespace CG
 
         protected async UniTask TypeText(CancellationToken token)
         {
-            _player.OnLanguageChanged += OnLanguageChangedHandler;
+            _player.OnLanguageChange += OnLanguageChangedHandler;
 
             while (true)
             {
                 if (token.IsCancellationRequested)
                 {
-                    break;
+                    return;
+                }
+
+                if (_player.IsPaused)
+                {
+                    await UniTask.DelayFrame(1);
+                    continue;
                 }
 
                 int length = _textMeshPro.maxVisibleCharacters;
                 if (length >= _textMeshPro.text.Length)
                 {
-                    _player.OnLanguageChanged -= OnLanguageChangedHandler;
+                    _player.OnLanguageChange -= OnLanguageChangedHandler;
                     break;
                 }
 

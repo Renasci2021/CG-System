@@ -12,9 +12,15 @@ namespace CG
         [SerializeField] private Sprite[] _frames;  // 帧动画
         [SerializeField] private int _frameRate = 8;  // 帧率
 
-        private Image _background;  // 背景图片
+        private CGPlayer _player;
 
+        private Image _background;  // 背景图片
         private int _currentFrameIndex = 0;  // 当前帧索引
+
+        public void Initialize(CGPlayer player)
+        {
+            _player = player;
+        }
 
         public async UniTask Enter(CancellationToken token)
         {
@@ -26,6 +32,12 @@ namespace CG
                 if (token.IsCancellationRequested)
                 {
                     break;
+                }
+
+                if (_player.IsPaused)
+                {
+                    await UniTask.DelayFrame(1);
+                    continue;
                 }
 
                 if (color.a >= 1f)
@@ -52,6 +64,12 @@ namespace CG
                     break;
                 }
 
+                if (_player.IsPaused)
+                {
+                    await UniTask.DelayFrame(1);
+                    continue;
+                }
+
                 if (color.a <= 0f)
                 {
                     color.a = 0f;
@@ -75,6 +93,12 @@ namespace CG
                     break;
                 }
 
+                if (_player.IsPaused)
+                {
+                    await UniTask.DelayFrame(1);
+                    continue;
+                }
+
                 _background.sprite = _frames[_currentFrameIndex];
                 int interval = 1000 / _frameRate;
                 await UniTask.Delay(interval, cancellationToken: token);
@@ -86,7 +110,7 @@ namespace CG
         {
             _background = GetComponent<Image>();
 
-            Color color = _background.color;
+            Color color = Color.white;
             color.a = 0f;
             _background.color = color;
             gameObject.SetActive(false);

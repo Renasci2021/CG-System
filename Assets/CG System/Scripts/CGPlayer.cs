@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Sirenix.Utilities;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -18,7 +17,7 @@ namespace CG
         private Scene[] _scenes;
         private Narration[] _narrations;
         private DialogPlayer _dialogPlayer;
-        private int _currentSceneIndex = -1;
+        private int _currentSceneIndex = 0;
         private int _currentNarrationIndex;
 
         private CGState _state = CGState.None;
@@ -27,15 +26,18 @@ namespace CG
         private bool _fastForward;
         private Language _language;
 
-        private delegate UniTask PlayMethod(CancellationToken token);
         private CancellationTokenSource _tokenSource;
+        // private List<ResumeMethod> _resumeMethods = new();
 
-        public event Action OnAutoPlayChanged;
-        public event Action OnFastForwardChanged;
-        public event Action OnLanguageChanged;
-        public event Action OnPlayCompleted;
+        // private delegate UniTask ResumeMethod();
+
+        public event Action OnAutoPlayChange;
+        public event Action OnFastForwardChange;
+        public event Action OnLanguageChange;
+        public event Action OnPlayComplete;
         public event Action OnHideTextAndUI;
         public event Action OnShowTextAndUI;
+        internal event Action OnSkip;
 
         public bool AutoPlay
         {
@@ -48,7 +50,7 @@ namespace CG
                     if (_state == CGState.Waiting)
                     {
                         UpdateStoryLine();
-                        PlayStoryLine();
+                        PlayStoryLine().Forget();
                     }
                 }
                 else
@@ -61,7 +63,7 @@ namespace CG
                 }
 
                 _autoPlay = value;
-                OnAutoPlayChanged?.Invoke();
+                OnAutoPlayChange?.Invoke();
             }
         }
 
@@ -76,7 +78,7 @@ namespace CG
                 }
 
                 _fastForward = value;
-                OnFastForwardChanged?.Invoke();
+                OnFastForwardChange?.Invoke();
             }
         }
 
@@ -86,9 +88,12 @@ namespace CG
             set
             {
                 _language = value;
-                OnLanguageChanged?.Invoke();
+                OnLanguageChange?.Invoke();
             }
         }
+
+        // TODO: replace with async methods
+        internal bool IsPaused => _state == CGState.Paused;
 
         public TMP_FontAsset FontAsset { get; private set; } = null;
 
@@ -113,12 +118,12 @@ namespace CG
             _storyLine = _xmlReader.NextLine;
 
             _tokenSource = new();
-            PlayStoryLine();
+            PlayStoryLine().Forget();
         }
 
         public void Pause()
         {
-            _tokenSource.Cancel();
+            // _tokenSource.Cancel();
 
             _previousState = _state;
             _state = CGState.Paused;
@@ -126,23 +131,36 @@ namespace CG
 
         public void Resume()
         {
-            _tokenSource = new();
             _state = _previousState;
             _previousState = CGState.None;
 
-            _tokenSource = new();
-            PlayStoryLine();
+            // _tokenSource = new();
+            // var tasks = new List<UniTask>(_resumeMethods.Count);
+            // _resumeMethods.ForEach(resumeMethod => tasks.Add(resumeMethod()));
+            // _resumeMethods.Clear();
+            // bool isCanceled = await UniTask.WhenAll(tasks).SuppressCancellationThrow();
+            // if (isCanceled)
+            // {
+            //     return;
+            // }
+            // OnStoryLineCompleted().Forget();
         }
 
         public void Stop()
         {
-            OnAutoPlayChanged = null;
-            OnFastForwardChanged = null;
-            OnLanguageChanged = null;
-            OnPlayCompleted = null;
+            OnAutoPlayChange = null;
+            OnFastForwardChange = null;
+            OnLanguageChange = null;
+            OnPlayComplete = null;
+            OnHideTextAndUI = null;
+            OnShowTextAndUI = null;
+            OnSkip = null;
 
+            // _resumeMethods.Clear();
             _tokenSource.Cancel();
         }
+
+        public void Skip() => OnSkip?.Invoke();
 
         public void HideText() => OnHideTextAndUI?.Invoke();
 
@@ -150,15 +168,19 @@ namespace CG
 
         private void UpdateStoryLine() => _storyLine = _xmlReader.NextLine;
 
-        private async void PlayStoryLine()
+        private async UniTaskVoid PlayStoryLine()
         {
             if (_storyLine == null)
             {
-                OnPlayCompleted?.Invoke();
+                _state = CGState.None;
+                OnPlayComplete?.Invoke();
+                Stop();
                 return;
             }
 
-            await (_storyLine.LineType switch
+            _state = CGState.Playing;
+
+            bool isCanceled = await (_storyLine.LineType switch
             {
                 LineType.Scene => PlayScene(),
                 LineType.Narration => PlayNarration(),
@@ -169,13 +191,17 @@ namespace CG
                     _storyLine.LineType,
                     null
                 )
-            });
-
-            OnStoryLineCompleted();
+            }).SuppressCancellationThrow();
+            if (isCanceled)
+            {
+                return;
+            }
+            OnStoryLineCompleted().Forget();
         }
 
-        private async void OnStoryLineCompleted()
+        private async UniTaskVoid OnStoryLineCompleted()
         {
+            _state = CGState.Waiting;
             // TODO: Interval or interactive between story lines
             await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: _tokenSource.Token);
             if (_tokenSource.Token.IsCancellationRequested)
@@ -183,104 +209,122 @@ namespace CG
                 return;
             }
             UpdateStoryLine();
-            PlayStoryLine();
+            PlayStoryLine().Forget();
         }
 
         private async UniTask PlayScene()
         {
-            if (_currentSceneIndex != -1)
+            bool isCanceled;
+            if (_currentSceneIndex != 0)
             {
-                await ClearScene();
-                if (_tokenSource.Token.IsCancellationRequested)
+                isCanceled = await ClearScene().SuppressCancellationThrow();
+                if (isCanceled)
                 {
+                    // _resumeMethods.Add(() => PlayScene());
                     return;
                 }
             }
 
-            var scene = _scenes[++_currentSceneIndex];
+            var scene = _scenes[_currentSceneIndex];
+            scene.Initialize(this);
             // * param true: include inactive objects
             _narrations = scene.GetComponentsInChildren<Narration>(true);
             _currentNarrationIndex = 0;
 
-            await scene.Enter(_tokenSource.Token);
-            if (_tokenSource.Token.IsCancellationRequested)
+            isCanceled = await scene.Enter(_tokenSource.Token).SuppressCancellationThrow();
+            if (await scene.Enter(_tokenSource.Token).SuppressCancellationThrow())
             {
+                // _resumeMethods.Add(() => PlayScene());
                 return;
             }
+            _currentSceneIndex++;
         }
 
         private async UniTask PlayNarration()
         {
-            await _dialogPlayer.Exit(_tokenSource.Token);
-            if (_tokenSource.Token.IsCancellationRequested)
+            bool isCanceled = await _dialogPlayer.Exit(_tokenSource.Token).SuppressCancellationThrow();
+            if (isCanceled)
             {
+                // _resumeMethods.Add(() => PlayNarration());
                 return;
             }
 
-            // FIXME: Pause will cause out of index
-            // ! Use some other way to handle this
-            var narration = _narrations[_currentNarrationIndex++];
+            var narration = _narrations[_currentNarrationIndex];
             narration.Initialize(this);
             narration.InitializeLine(_storyLine);
 
-            await narration.Enter(_tokenSource.Token);
-            if (_tokenSource.Token.IsCancellationRequested)
+            await EnterNarration(narration);
+
+            async UniTask EnterNarration(Narration narration)
             {
-                return;
+                isCanceled = await narration.Enter(_tokenSource.Token).SuppressCancellationThrow();
+                if (isCanceled)
+                {
+                    // _resumeMethods.Add(() => EnterNarration(narration));
+                    return;
+                }
+                _currentNarrationIndex++;
             }
         }
 
         private async UniTask PlayDialog()
         {
+            bool isCanceled;
             if (_storyLine.NeedClearNarrations)
             {
-                await ClearNarrations();
-                if (_tokenSource.Token.IsCancellationRequested)
+                isCanceled = await ClearNarrations().SuppressCancellationThrow();
+                if (isCanceled)
                 {
+                    // _resumeMethods.Add(() => PlayDialog());
                     return;
                 }
             }
 
-            await _dialogPlayer.Enter(_storyLine, _tokenSource.Token);
-            if (_tokenSource.Token.IsCancellationRequested)
+            isCanceled = await _dialogPlayer.Enter(_storyLine, _tokenSource.Token).SuppressCancellationThrow();
+            if (isCanceled)
             {
+                // _resumeMethods.Add(() => PlayDialog());
                 return;
             }
         }
 
         private async UniTask PlayAnimation()
         {
-            var scene = _scenes[_currentSceneIndex];
-            await scene.PlayAnimation(_tokenSource.Token);
-            if (_tokenSource.Token.IsCancellationRequested)
+            var scene = _scenes[_currentSceneIndex - 1];
+            bool isCanceled = await scene.PlayAnimation(_tokenSource.Token).SuppressCancellationThrow();
+            if (isCanceled)
             {
+                // _resumeMethods.Add(() => PlayAnimation());
                 return;
             }
         }
 
         private async UniTask ClearScene()
         {
-            await UniTask.WhenAll(
-                _scenes[_currentSceneIndex].Exit(_tokenSource.Token),
+            bool isCanceled = await UniTask.WhenAll(
+                _scenes[_currentSceneIndex - 1].Exit(_tokenSource.Token),
                 _dialogPlayer.Exit(_tokenSource.Token),
                 _storyLine.NeedClearNarrations ? ClearNarrations() : UniTask.CompletedTask
-            );
-            if (_tokenSource.Token.IsCancellationRequested)
+            ).SuppressCancellationThrow();
+            if (isCanceled)
             {
+                // _resumeMethods.Add(() => ClearScene());
                 return;
             }
         }
 
         public async UniTask ClearNarrations()
         {
-            List<PlayMethod> playMethods = new();
-            _narrations.ForEach(narration => playMethods.Add(narration.Exit));
-
-            var tasks = new List<UniTask>(playMethods.Count);
-            playMethods.ForEach(playMethod => tasks.Add(playMethod(_tokenSource.Token)));
-            await UniTask.WhenAll(tasks);
-            if (_tokenSource.Token.IsCancellationRequested)
+            var tasks = new List<UniTask>(_narrations.Length);
+            foreach (var narration in _narrations)
             {
+                tasks.Add(narration.Exit(_tokenSource.Token));
+            }
+
+            bool isCanceled = await UniTask.WhenAll(tasks).SuppressCancellationThrow();
+            if (isCanceled)
+            {
+                // _resumeMethods.Add(() => ClearNarrations());
                 return;
             }
         }

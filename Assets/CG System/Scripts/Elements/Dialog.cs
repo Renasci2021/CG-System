@@ -55,6 +55,7 @@ namespace CG
         public override async UniTask Enter(CancellationToken token)
         {
             gameObject.SetActive(true);
+            _player.OnSkip += () => Skip();
 
             if (_animationType == AnimationType.Fade)
             {
@@ -97,6 +98,7 @@ namespace CG
             _textMeshPro.maxVisibleCharacters = 0;
             _isExiting = false;
             gameObject.SetActive(false);
+            _player.OnSkip -= Skip;
         }
 
         public override void Skip()

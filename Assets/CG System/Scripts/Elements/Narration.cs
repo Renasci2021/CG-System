@@ -20,12 +20,19 @@ namespace CG
             gameObject.SetActive(true);
             _isEntering = true;
             Color imageColor = _image.color;
+            _player.OnSkip += () => Skip();
 
             while (true)
             {
                 if (token.IsCancellationRequested)
                 {
-                    break;
+                    return;
+                }
+
+                if (_player.IsPaused)
+                {
+                    await UniTask.DelayFrame(1);
+                    continue;
                 }
 
                 if (imageColor.a >= 1f)
@@ -63,12 +70,19 @@ namespace CG
                     break;
                 }
 
+                if (_player.IsPaused)
+                {
+                    await UniTask.DelayFrame(1);
+                    continue;
+                }
+
                 if (imageColor.a <= 0f)
                 {
                     _isExiting = false;
                     _image.color = Color.clear;
                     _textMeshPro.color = Color.clear;
                     gameObject.SetActive(false);
+                    _player.OnSkip -= () => Skip();
                     break;
                 }
 
