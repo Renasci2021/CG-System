@@ -26,7 +26,7 @@
 # Visual Studio cache directory
 .vs/
 
-# VS Code cache directory
+# VS Code user settings
 .vscode/
 
 # Gradle cache directory
@@ -70,12 +70,3 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-
-# Others plugins
-/[Aa]ssets/Plugins/
-/[Aa]ssets/TextMesh Pro/
-/[Aa]ssets/Plugins.meta
-/[Aa]ssets/TextMesh Pro.meta
-
-# Deprecated scripts folder
-/[Aa]ssets/CG System/Scripts_deprecated/
