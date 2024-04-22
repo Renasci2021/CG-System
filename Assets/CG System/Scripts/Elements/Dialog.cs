@@ -39,7 +39,7 @@ namespace CG
             base.InitializeLine(storyLine);
 
             string characterName = storyLine.Character;
-            string nameStripPath = $"{_folderPath}/NameStrips/{characterName}.png";
+            string nameStripPath = $"{_folderPath}/NameStrips/名字-{characterName}.png";
             _nameStrip.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(nameStripPath);
 
             if (_face != null)
@@ -50,6 +50,7 @@ namespace CG
 
             // TODO: Support more animation types
             _animationType = AnimationType.Immediate;
+            _isToSkip = false;
         }
 
         public override async UniTask Enter(CancellationToken token)

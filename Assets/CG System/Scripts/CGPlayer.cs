@@ -10,6 +10,8 @@ namespace CG
 {
     public class CGPlayer : MonoBehaviour, ICGPlayerInterface
     {
+        [SerializeField] private float _interval = 1f;
+
         private string _chapterName;
         private XMLReader _xmlReader;
 
@@ -27,6 +29,7 @@ namespace CG
         private Language _language;
 
         private CancellationTokenSource _tokenSource;
+        private CancellationTokenSource _intervalTokenSource;
         // private List<ResumeMethod> _resumeMethods = new();
 
         // private delegate UniTask ResumeMethod();
@@ -44,26 +47,25 @@ namespace CG
             get => _autoPlay;
             set
             {
-                if (value)
-                {
-                    _state = CGState.AutoPlaying;
-                    if (_state == CGState.Waiting)
-                    {
-                        UpdateStoryLine();
-                        PlayStoryLine().Forget();
-                    }
-                }
-                else
-                {
-                    _state = CGState.Playing;
-                    if (_fastForward)
-                    {
-                        FastForward = false;
-                    }
-                }
+                throw new NotImplementedException();
+                // if (value)
+                // {
+                //     if (_state == CGState.Waiting)
+                //     {
+                //         _intervalTokenSource.Cancel();
+                //     }
+                // }
+                // else
+                // {
+                //     _state = CGState.Playing;
+                //     if (_fastForward)
+                //     {
+                //         FastForward = false;
+                //     }
+                // }
 
-                _autoPlay = value;
-                OnAutoPlayChange?.Invoke();
+                // _autoPlay = value;
+                // OnAutoPlayChange?.Invoke();
             }
         }
 
@@ -72,13 +74,18 @@ namespace CG
             get => _fastForward;
             set
             {
-                if (value && !_autoPlay)
-                {
-                    AutoPlay = true;
-                }
-
                 _fastForward = value;
-                OnFastForwardChange?.Invoke();
+                if (_state == CGState.Waiting)
+                {
+                    _intervalTokenSource.Cancel();
+                }
+                // if (value && !_autoPlay)
+                // {
+                //     AutoPlay = true;
+                // }
+
+                // _fastForward = value;
+                // OnFastForwardChange?.Invoke();
             }
         }
 
@@ -92,7 +99,6 @@ namespace CG
             }
         }
 
-        // TODO: replace with async methods
         internal bool IsPaused => _state == CGState.Paused;
 
         public TMP_FontAsset FontAsset { get; private set; } = null;
@@ -114,7 +120,6 @@ namespace CG
 
         public void Play()
         {
-            _state = CGState.Playing;
             _storyLine = _xmlReader.NextLine;
 
             _tokenSource = new();
@@ -134,6 +139,7 @@ namespace CG
             _state = _previousState;
             _previousState = CGState.None;
 
+            // TODO: Replace with async UniTask methods
             // _tokenSource = new();
             // var tasks = new List<UniTask>(_resumeMethods.Count);
             // _resumeMethods.ForEach(resumeMethod => tasks.Add(resumeMethod()));
@@ -160,7 +166,17 @@ namespace CG
             _tokenSource.Cancel();
         }
 
-        public void Skip() => OnSkip?.Invoke();
+        public void Skip()
+        {
+            if (_state == CGState.Waiting)
+            {
+                _intervalTokenSource.Cancel();
+            }
+            else
+            {
+                OnSkip?.Invoke();
+            }
+        }
 
         public void HideText() => OnHideTextAndUI?.Invoke();
 
@@ -186,28 +202,38 @@ namespace CG
                 LineType.Narration => PlayNarration(),
                 LineType.Dialog => PlayDialog(),
                 LineType.PlayAnimation => PlayAnimation(),
-                _ => throw new ArgumentOutOfRangeException(
-                    nameof(_storyLine.LineType),
-                    _storyLine.LineType,
-                    null
-                )
+                _ => UniTask.CompletedTask
             }).SuppressCancellationThrow();
             if (isCanceled)
             {
                 return;
             }
-            OnStoryLineCompleted().Forget();
+            OnStoryLineCompleted();
         }
 
-        private async UniTaskVoid OnStoryLineCompleted()
+        private void OnStoryLineCompleted()
         {
-            _state = CGState.Waiting;
-            // TODO: Interval or interactive between story lines
-            await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: _tokenSource.Token);
-            if (_tokenSource.Token.IsCancellationRequested)
+            if (FastForward)
             {
+                UpdateStoryLine();
+                PlayStoryLine().Forget();
                 return;
             }
+
+            TimeSpan timeSpan = _storyLine.ContinuationMode switch
+            {
+                ContinuationMode.Interval => TimeSpan.FromSeconds(_interval),
+                _ => TimeSpan.MaxValue
+            };
+            _intervalTokenSource = new();
+            NextStoryLineAfterInterval(timeSpan, _intervalTokenSource.Token).Forget();
+        }
+
+        private async UniTaskVoid NextStoryLineAfterInterval(TimeSpan timeSpan, CancellationToken token)
+        {
+            _state = CGState.Waiting;
+            await UniTask.Delay(timeSpan, cancellationToken: token).SuppressCancellationThrow();
+
             UpdateStoryLine();
             PlayStoryLine().Forget();
         }

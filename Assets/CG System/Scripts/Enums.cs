@@ -33,6 +33,5 @@ namespace CG
         Playing,
         Paused,
         Waiting,
-        AutoPlaying,
     }
 }

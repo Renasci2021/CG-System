@@ -8,7 +8,6 @@ namespace CG
     internal class Narration : TextBlock
     {
         [SerializeField] private float _fadeSpeed = 2f; // 渐变速度
-        [SerializeField] private float _fastForwardFadeSpeed = 10f; // 快进时渐变速度
 
         private Image _image;   // 旁白框
 
@@ -43,9 +42,10 @@ namespace CG
                     break;
                 }
 
-                if (_player.FastForward)
+                if (_player.FastForward || _isToSkip)
                 {
                     imageColor.a = 1f;
+                    _image.color = imageColor;
                     continue;
                 }
 
@@ -86,8 +86,7 @@ namespace CG
                     break;
                 }
 
-                float speed = _player.FastForward ? _fastForwardFadeSpeed : _fadeSpeed;
-                imageColor.a -= speed * Time.deltaTime;
+                imageColor.a -= _fadeSpeed * Time.deltaTime;
                 textColor.a = imageColor.a;
                 _image.color = imageColor;
                 _textMeshPro.color = textColor;
@@ -97,16 +96,6 @@ namespace CG
 
         public override void Skip()
         {
-            if (_isEntering)
-            {
-                _image.color = new(_image.color.r, _image.color.g, _image.color.b, 1f);
-            }
-            if (_isExiting)
-            {
-                _image.color = Color.clear;
-                _textMeshPro.color = Color.clear;
-            }
-
             SkipTyping();
         }
 

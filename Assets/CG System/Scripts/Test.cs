@@ -6,7 +6,6 @@ public class Test : MonoBehaviour
     private ICGPlayerInterface _player;
 
     private bool _isPlaying = true;
-    private bool _isHiding = false;
 
     private void Awake()
     {
@@ -37,17 +36,14 @@ public class Test : MonoBehaviour
         {
             _player.Stop();
         }
-        if (Input.GetKeyDown(KeyCode.H))
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (_isHiding)
-            {
-                _player.ShowText();
-            }
-            else
-            {
-                _player.HideText();
-            }
-            _isHiding = !_isHiding;
+            _player.FastForward = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            _player.FastForward = false;
         }
     }
 }

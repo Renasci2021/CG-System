@@ -9,11 +9,13 @@ namespace CG
     internal abstract class TextBlock : MonoBehaviour
     {
         [SerializeField] protected Color _textColor = Color.black;
-        [SerializeField] private float _typeSpeed = 10f;
-        [SerializeField] private float _fastForwardTypeSpeed = 50f;
+        [SerializeField] private float _typeSpeed = 20f;
+        [SerializeField] private float _fastForwardTypeSpeed = 100f;
 
         protected CGPlayer _player;
         protected TextMeshProUGUI _textMeshPro;
+
+        protected bool _isToSkip = false;
 
         public string Text
         {
@@ -86,7 +88,7 @@ namespace CG
                     break;
                 }
 
-                float speed = _player.FastForward ? _fastForwardTypeSpeed : _typeSpeed;
+                float speed = _isToSkip || _player.FastForward ? _fastForwardTypeSpeed : _typeSpeed;
                 float delay = 1f / speed;
                 _textMeshPro.maxVisibleCharacters = length + 1;
                 await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: token);
@@ -95,7 +97,7 @@ namespace CG
 
         protected void SkipTyping()
         {
-            _textMeshPro.maxVisibleCharacters = _textMeshPro.text.Length;
+            _isToSkip = true;
         }
 
         private void OnLanguageChangedHandler()

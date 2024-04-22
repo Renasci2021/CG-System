@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b75f39481df7949acd580994a19c4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interval: 1
 --- !u!224 &127000623
 RectTransform:
   m_ObjectHideFlags: 0
@@ -399,7 +400,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -718,13 +719,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316167704}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -971.9597, y: -479.10226, z: 1.6541824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 880338931}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &323148157
 GameObject:
@@ -780,8 +781,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textColor: {r: 0, g: 0, b: 0, a: 1}
-  _typeSpeed: 10
-  _fastForwardTypeSpeed: 50
+  _typeSpeed: 20
+  _fastForwardTypeSpeed: 100
   _textBoxType: 0
   _dialogBox: {fileID: 0}
   _face: {fileID: 0}
@@ -1784,9 +1785,11 @@ Transform:
   m_LocalPosition: {x: 971.9597, y: 479.10226, z: -1.6541824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1996098775}
+  - {fileID: 316167707}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &929642503
 PrefabInstance:
@@ -2880,7 +2883,7 @@ RectTransform:
   - {fileID: 676121076}
   - {fileID: 809113866}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3009,6 +3012,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1509124100}
     m_Modifications:
+    - target: {fileID: 1424965521643657671, guid: ce65e34365ca1544aa5329b5c081d315, type: 3}
+      propertyPath: m_text
+      value: some text
+      objectReference: {fileID: 0}
+    - target: {fileID: 1424965521643657671, guid: ce65e34365ca1544aa5329b5c081d315, type: 3}
+      propertyPath: m_margin.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1424965521643657671, guid: ce65e34365ca1544aa5329b5c081d315, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1424965523241703689, guid: ce65e34365ca1544aa5329b5c081d315, type: 3}
       propertyPath: m_Name
       value: Text
@@ -3156,8 +3171,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textColor: {r: 0, g: 0, b: 0, a: 1}
-  _typeSpeed: 10
-  _fastForwardTypeSpeed: 50
+  _typeSpeed: 20
+  _fastForwardTypeSpeed: 100
   _textBoxType: 1
   _dialogBox: {fileID: 0}
   _face: {fileID: 0}
@@ -3666,12 +3681,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1996098772}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -971.9597, y: -479.10226, z: -8.345818}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 880338931}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1996098776
@@ -3686,27 +3701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
 --- !u!1001 &2026773291
 PrefabInstance:
   m_ObjectHideFlags: 0
